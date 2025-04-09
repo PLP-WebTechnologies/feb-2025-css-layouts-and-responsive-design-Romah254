@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResponsiveLayoutMaster Pro</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-dark: #1a1a2e;
+            --primary: #16213e;
+            --primary-light: #0f3460;
+            --secondary: #e94560;
+            --accent: #f9a828;
+            --light: #f5f5f5;
+            --dark: #333;
+            --gradient: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-dark) 100%);
+            --shadow: 0 10px 20px rgba(0,0,0,0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.7;
+        }
+
+        /* Navigation Bar - Flexbox */
+        nav {
+            background: var(--primary-dark);
+            padding: 1.2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        .logo {
+            color: var(--light);
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+            position: relative;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            color: var(--light);
+            font-size: 1.8rem;
+            transition: var(--transition);
+        }
+
+        .menu-toggle:hover {
+            color: var(--accent);
+            transform: rotate(90deg);
+        }
+
+        /* Main Content - CSS Grid */
+        .container {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-gap: 3rem;
+            padding: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 4rem 2rem;
+            background: var(--gradient);
+            color: var(--light);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            opacity: 0.9;
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-gap: 2.5rem;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .card:hover img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 2rem;
+        }
+
+        .card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+            font-size: 1.5rem;
+        }
+
+        .card p {
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        .card .btn {
+            display: inline-block;
+            padding: 0.6rem 1.5rem;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .card .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        aside {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border-top: 5px solid var(--accent);
+        }
+
+        aside h3 {
+            color: var(--primary-dark);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        aside h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--gradient);
+        }
+
+        aside p {
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        footer {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 2.5rem;
+            background: var(--primary-dark);
+            color: var(--light);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        footer p {
+            margin-bottom: 0;
+            opacity: 0.8;
+        }
+
+        /* Media Queries */
+        /* Tablet */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 2rem;
+                grid-gap: 2rem;
+            }
+            
+            header {
+                padding: 3rem 1.5rem;
+            }
+            
+            header h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 2rem;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--primary);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 3rem;
+                transition: var(--transition);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 1.5rem 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            main {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 480px) {
+            nav {
+                padding: 1rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .container {
+                padding: 1.5rem;
+                grid-gap: 1.5rem;
+            }
+
+            header {
+                padding: 2.5rem 1rem;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            header p {
+                font-size: 1rem;
+            }
+
+            main {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                margin-bottom: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">ResponsiveLayoutMaster Pro</div>
+        <div class="menu-toggle">☰</div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Features</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>Modern Responsive Design</h1>
+            <p>Experience the perfect blend of Flexbox and CSS Grid with this premium responsive template featuring smooth animations and elegant color schemes</p>
+        </header>
+
+        <main>
+            <article class="card">
+                <img src="c:WhatsApp Image 2025-04-09 at 15.23.04_4c385775.jpg" alt="UI Design">
+                <div class="card-content">
+                    <h3>Flexbox Magic</h3>
+                    <p>Create flexible layouts with ease using CSS Flexbox. Perfect for components that need to align in one dimension.</p>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </article>
+
+            <article class="card">
+                <img src="c:WhatsApp Image 2025-04-09 at 15.26.55_061f574d.jpg" alt="Coding">
+                <div class="card-content">
+                    <h3>Grid Mastery</h3>
+                    <p>Harness the power of CSS Grid for complex two-dimensional layouts that adapt seamlessly to any screen size.</p>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </article>
+
+            <article class="card">
+                <img src="c:WhatsApp Image 2025-04-09 at 15.32.38_a09fc539.jpg" alt="Responsive Design">
+                <div class="card-content">
+                    <h3>Media Queries</h3>
+                    <p>Implement breakpoints that transform your layout to provide optimal viewing experiences across all devices.</p>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </article>
+        </main>
+
+        <aside>
+            <h3>Premium Features</h3>
+            <p>This enhanced template includes a sophisticated color palette with CSS variables, smooth animations, hover effects, and perfect responsive behavior across all device sizes.</p>
+            <p>The design system includes gradient accents, subtle shadows, and thoughtful typography to create visual hierarchy and professional appeal.</p>
+        </aside>
+
+        <footer>
+            <p>&copy; 2025 ResponsiveLayoutMaster Pro. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Enhanced JavaScript with smooth scrolling and menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            
+            menuToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                this.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+            });
+            
+            // Close menu when clicking on a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    menuToggle.textContent = '☰';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
